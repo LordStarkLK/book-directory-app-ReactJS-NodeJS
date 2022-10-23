@@ -1,7 +1,6 @@
 import "../src/style/home.css";
 import "../src/style/btn.css";
 import "../src/style/search.css";
-import "../src/style/font-awesome/css/font-awesome.css";
 
 function App() {
   return (
