@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #3C4048;
+    background-image: url('https://wallpaperaccess.com/full/1145359.png');
+    font-family: 'Montserrat', sans-serif;
+}
+.App{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    padding: 15px 0;
+}
+.canvas{
+    background-color: #000;
+    color: #EAEAEA;
+    width: 80vw;
+    height: fit-content;
+    border-radius: 20px;
+    border: solid 1px;
+    margin: 10px 0;
+    padding-bottom: 15px;
+}
+.top-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title-text{
+    padding-left: 15px;
+}
+.book-detail{
+    background-color: #e2e2e2;
+    display: flex;
+    padding: 10px 40px 10px 40px;
+    /* padding-left: 50px; */
+    /* padding-right: 50px; */
+    justify-content: flex-start;
+    margin: 10px 0;
+}
+.text-details{
+    display: flex;
+    color: #2e2e2e;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 300px;
+    padding: 0 15px;
+}
+.text-details > p{
+    margin: 0;
+}
+.book-name{
+    font-weight: 700;
+}
+.btm-row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
