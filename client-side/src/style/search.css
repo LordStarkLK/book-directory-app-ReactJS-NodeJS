@@ -3,7 +3,8 @@ label {
     max-width: 300px;
 }
 
-input {
+input,
+textarea {
     width: 100%;
     display: flex;
     padding: 15px;

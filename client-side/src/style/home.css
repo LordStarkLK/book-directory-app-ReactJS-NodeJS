@@ -61,3 +61,10 @@ body {
     width: 100%;
     align-items: center;
 }
+.dataInputForm {
+    margin: 40px 25px 0 0;
+}
+
+.dataInputs {
+    margin: 15px 25px 0 0;
+}

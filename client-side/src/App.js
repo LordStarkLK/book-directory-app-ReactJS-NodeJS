@@ -1,8 +1,50 @@
 import "../src/style/home.css";
 import "../src/style/btn.css";
 import "../src/style/search.css";
+import Popup from "./component/Popup";
+import React, { Component, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function App() {
+  const [btnPopup, setPopupState] = useState(false);
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
+    const bookName = data.bookName;
+    const description = data.description;
+    const authorName = data.authorName;
+
+    const words = data.file[0].name.split('.');
+    var fileName = Date.now() +"picture."+words[words.length-1];
+
+    const inputData = {
+      bookName,
+      description,
+      authorName,
+      fileName
+    };
+
+    const formData = new FormData();
+    formData.append("picture", data.file[0]);
+    formData.append("name", fileName);
+
+    const res = await fetch("http://localhost:5000/api/v1/settings/uploadFile", {
+      method: "POST",
+      body: formData
+    }).then(res => res.json())
+
+    console.log(formData);
+    
+
+    await axios
+    .post("http://localhost:5000/api/v1/settings/addBook", inputData)
+    .then((response) => {
+      console.log('Posting data', response);
+      alert("Form successfully submitted");
+    }).catch((err) => console.log(err));
+  };
+
   return (
     <div className="App">
       <div id="main" className="container canvas">
@@ -11,20 +53,46 @@ function App() {
           <div className="search-box">
             <label>
               <input type="search" placeholder="Search" required></input>
-              <ul>
-                <li s>s</li>
-                <li e>e</li>
-                <li a>a</li>
-                <li r>r</li>
-                <li c>c</li>
-                <li h>h</li>
-              </ul>
             </label>
           </div>
           <div className="top-btns">
-            <button class="button-54 Add" role="button">
+            <button
+              class="button-54 Add"
+              role="button"
+              onClick={() => setPopupState(true)}
+            >
               Add
             </button>
+            <Popup trigger={btnPopup} setTrigger={setPopupState}>
+              <form onSubmit={handleSubmit(onSubmit)} className="dataInputForm">
+                <input
+                  className="dataInputs"
+                  type="text"
+                  placeholder="Name"
+                  {...register("bookName", { required: true })}
+                />
+                <textarea
+                  className="dataInputs"
+                  type="textare"
+                  placeholder="Description"
+                  {...register("description", { required: true })}
+                />
+                <input
+                  className="dataInputs"
+                  type="text"
+                  placeholder="Author"
+                  {...register("authorName", { required: true })}
+                />
+                <input
+                  className="dataInputs"
+                  type="file"
+                  {...register("file")}
+                />
+                <button type="submit" className="button-54 update">
+                  Submit
+                </button>
+              </form>
+            </Popup>
           </div>
         </div>
 
@@ -53,10 +121,10 @@ function App() {
             <div className="btm-row">
               <h2 className="author-name">Shehan Karunatilaka</h2>
               <div className="buttons">
-                <button class="button-54 update" role="button">
+                <button className="button-54 update" role="button">
                   Update
                 </button>
-                <button class="button-54 delete" role="button">
+                <button className="button-54 delete" role="button">
                   Delete
                 </button>
               </div>
