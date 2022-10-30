@@ -96,7 +96,7 @@ function App() {
                   {...register("bookName", { required: true })}
                 />
                 <textarea
-                  className="dataInputs"
+                  className="dataInputs textArea"
                   type="textare"
                   placeholder="Description"
                   {...register("description", { required: true })}

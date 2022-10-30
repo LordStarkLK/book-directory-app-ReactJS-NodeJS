@@ -75,3 +75,6 @@ body {
     bottom: 20px;
     right: 20px;
 }
+textArea {
+    height: 200px;
+}

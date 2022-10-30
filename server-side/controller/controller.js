@@ -66,6 +66,19 @@ const deleteData = asyncHandler(async (req, res) => {
   );
 });
 
+//update data
+const updateData = asyncHandler(async (req, res) => {
+  const { bookName, description, authorName, fileName } = req.body;
+  const id = req.params.id;
+  connection.query(
+    `UPDATE books SET name='${bookName}', description='${description}', author='${authorName}',image='${fileName}' WHERE id='${id}'`,
+    function (error,results) {
+      if (error) throw error;
+      res.status(StatusCodes.CREATED).json(results);
+    }
+  );
+});
+
 //file upload function
 app.use(fileUpload({
     createParentPath: true
@@ -98,5 +111,6 @@ module.exports = {
   uploadFile,
   addBook,
   getBooks,
-  deleteData
+  deleteData,
+  updateData
 };
