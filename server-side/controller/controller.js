@@ -16,10 +16,22 @@ var connection = mysql.createPool({
   database: "book_directory",
 });
 
+//get existing book details
+const getBooks = asyncHandler(async (req, res) => {
+
+  connection.query(
+    `SELECT * FROM books`,
+    function (error, results, fields) {
+      if (error) throw error;
+
+      res.json(results);
+    }
+  );
+});
+
 //add a book to library
 const addBook = asyncHandler(async (req, res) => {
   const { bookName, description, authorName, fileName } = req.body;
-  console.log(req.body);
 
   connection.query(
     `INSERT INTO books(name, description, author, image) 
@@ -69,5 +81,6 @@ app.use(fileUpload({
 
 module.exports = {
   uploadFile,
-  addBook
+  addBook,
+  getBooks
 };
