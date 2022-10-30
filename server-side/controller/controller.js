@@ -51,6 +51,21 @@ const addBook = asyncHandler(async (req, res) => {
   );
 });
 
+
+//delete data
+const deleteData = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  connection.query(
+    `DELETE FROM books WHERE id=${id}`,
+    function (error, results) {
+      if (error) throw error;
+
+      res.json(results);
+    }
+  );
+});
+
 //file upload function
 app.use(fileUpload({
     createParentPath: true
@@ -82,5 +97,6 @@ app.use(fileUpload({
 module.exports = {
   uploadFile,
   addBook,
-  getBooks
+  getBooks,
+  deleteData
 };
