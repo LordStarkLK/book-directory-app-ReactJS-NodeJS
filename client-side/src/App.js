@@ -59,11 +59,16 @@ function App() {
     .then((response) => {
       console.log('Posting data', response);
       alert("Form successfully submitted");
+      refreshPage();
     }).catch((err) => console.log(err));
   };
 
   console.log(bookData);
   bookData.map((e) => console.log(e));
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
   return (
     <div className="App">
       <div id="main" className="container canvas">

@@ -21,6 +21,10 @@ app.use(express.static('public'));
 // routes
 app.use("/api/v1/settings", settingsRouter);
 
+//Print images on frontend
+
+app.use(express.static('public'));
+
 //port
 const port = process.env.PORT || 5000;
 

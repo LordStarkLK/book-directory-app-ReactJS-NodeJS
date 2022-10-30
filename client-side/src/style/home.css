@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 body {
-    margin: 0px;
+    margin: 10px 0;
     padding: 0px;
     background-color: #3C4048;
     background-image: url('https://wallpaperaccess.com/full/1145359.png');
@@ -13,6 +13,7 @@ body {
     height: 100vh;
     align-items: center;
     padding: 15px 0;
+    align-items: flex-start;
 }
 .canvas{
     background-color: #000;
@@ -21,7 +22,7 @@ body {
     height: fit-content;
     border-radius: 20px;
     border: solid 1px;
-    margin: 10px 0;
+    margin: 20px 0;
     padding-bottom: 15px;
 }
 .top-row{
@@ -40,6 +41,7 @@ body {
     /* padding-right: 50px; */
     justify-content: flex-start;
     margin: 10px 0;
+    position: relative;
 }
 .text-details{
     display: flex;
@@ -67,4 +69,9 @@ body {
 
 .dataInputs {
     margin: 15px 25px 0 0;
+}
+.buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }

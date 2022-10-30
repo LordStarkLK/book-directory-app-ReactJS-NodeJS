@@ -4,12 +4,13 @@ import "../style/btn.css";
 import "../style/search.css";
 
 function BookDetails(props) {
+  const userPicture = "http://localhost:5000/images/" + props.data.image;
   return (
     <div>
       {/* book details card */}
       <div className="book-detail">
         <img
-          src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1658847734i/57224204.jpg"
+          src={userPicture}
           alt="Book cover"
           width="auto"
           height="290px"
