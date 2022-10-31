@@ -10,10 +10,10 @@ const app = express();
 var mysql = require("mysql");
 var connection = mysql.createPool({
   connectionLimit: 10,
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "book_directory",
+  host: "sql238.main-hosting.eu",
+  user: "u117929562_user",
+  password: "Password#2022",
+  database: "u117929562_books",
 });
 
 //get existing book details
