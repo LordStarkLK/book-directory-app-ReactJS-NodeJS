@@ -10,11 +10,14 @@ import BookDetails from "./component/BookDetails";
 function App() {
   const [btnPopup, setPopupState] = useState(false);
 
+  //search function
+  const [searchTerm, setSearchTerm] = useState("");
+
   //getting existing data
-  const [bookData,setBookData] = useState([]);
+  const [bookData, setBookData] = useState([]);
   useEffect(() => {
     getBooks();
-  },[]);
+  }, []);
 
   const getBooks = async () => {
     await axios
@@ -32,35 +35,38 @@ function App() {
     const description = data.description;
     const authorName = data.authorName;
 
-    const words = data.file[0].name.split('.');
-    var fileName = Date.now() +"picture."+words[words.length-1];
+    const words = data.file[0].name.split(".");
+    var fileName = Date.now() + "picture." + words[words.length - 1];
 
     const inputData = {
       bookName,
       description,
       authorName,
-      fileName
+      fileName,
     };
 
     const formData = new FormData();
     formData.append("picture", data.file[0]);
     formData.append("name", fileName);
 
-    const res = await fetch("http://localhost:5000/api/v1/settings/uploadFile", {
-      method: "POST",
-      body: formData
-    }).then(res => res.json())
+    const res = await fetch(
+      "http://localhost:5000/api/v1/settings/uploadFile",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((res) => res.json());
 
     console.log(formData);
-    
 
     await axios
-    .post("http://localhost:5000/api/v1/settings/addBook", inputData)
-    .then((response) => {
-      console.log('Posting data', response);
-      alert("Form successfully submitted");
-      refreshPage();
-    }).catch((err) => console.log(err));
+      .post("http://localhost:5000/api/v1/settings/addBook", inputData)
+      .then((response) => {
+        console.log("Posting data", response);
+        alert("Form successfully submitted");
+        refreshPage();
+      })
+      .catch((err) => console.log(err));
   };
 
   console.log(bookData);
@@ -76,7 +82,13 @@ function App() {
           <h1 className="display-6 title-text">Books </h1>
           <div className="search-box">
             <label>
-              <input type="search" placeholder="Search" required></input>
+              <input
+                type="search"
+                placeholder="Search"
+                onChange={(event) => {
+                  setSearchTerm(event.target.value);
+                }}
+              ></input>
             </label>
           </div>
           <div className="top-btns">
@@ -120,8 +132,15 @@ function App() {
           </div>
         </div>
 
-        {bookData.map((e)=><BookDetails data={e}/>)}
-        
+        {bookData.filter((val)=>{
+          if(searchTerm==""){
+            return val;
+          }else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+            return val;
+          }
+        }).map((e) => (
+          <BookDetails data={e} />
+        ))}
       </div>
     </div>
   );
